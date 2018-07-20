@@ -15,17 +15,23 @@ Feature: User registers
     """
     When I run the following mutation
     """
-    mutation Register($identity: Identity!) {
+    mutation Register($identity: IdentityInput!) {
       register(identity: $identity) {
         accessToken
         user {
           id
           email
         }
+        identity {
+          identifier
+          type
+        }
       }
     }
     """
-    Then the response has a UUID at "authenticate.user.id"
-    And the response has a functioning access token at "authenticate.accessToken"
-    And the response has "{{ me.email }}" at "authenticate.user.id"
+    Then the response has no errors
+    And the response has an ID at "register.user.id"
+    And the response has a functioning access token at "register.accessToken"
+    And the response has "{{ me.email }}" at "register.identity.identifier"
+    And the response has "EmailAndPasswordIdentity" at "register.identity.type"
 

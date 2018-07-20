@@ -1,0 +1,48 @@
+require:
+  - rubocop-rspec
+  - rubocop/migrations
+
+AllCops:
+  TargetRubyVersion: 2.5
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  Exclude:
+    - bin/bundle
+    - lib/tasks/cucumber.rake
+    - node_modules/**/*
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Metrics/AbcSize:
+  Exclude:
+    - db/schema.rb
+    - db/migrate/**/*
+
+Metrics/BlockLength:
+  Exclude:
+    - "*.gemspec"
+    - "spec/**/*_spec.rb"
+    - db/schema.rb
+
+Metrics/LineLength:
+  Max: 110
+  Exclude:
+    - db/schema.rb
+
+Metrics/MethodLength:
+  Exclude:
+    - db/migrate/**/*
+
+Style/Documentation:
+  Exclude:
+    - "db/migrate/**/*"
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false

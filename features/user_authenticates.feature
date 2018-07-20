@@ -13,9 +13,9 @@ Feature: User authenticates
       }
     }
     """
-    When I execute the following graphql
+    When I run the following mutation
     """
-    mutation Authenticate($identity: Identity!) {
+    mutation Authenticate($identity: IdentityInput!) {
       authenticate(identity: $identity) {
         accessToken
         user {
@@ -27,4 +27,4 @@ Feature: User authenticates
     """
     Then the response has "{{ me.id }}" at "authenticate.user.id"
     And the response has a functioning access token at "authenticate.accessToken"
-    And the response has "{{ me.email }}" at "authenticate.user.id"
+    And the response has "{{ me.email }}" at "authenticate.user.email"
