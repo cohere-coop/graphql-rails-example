@@ -2,7 +2,7 @@
 
 module Types
   class User < BaseObject
-    field :id, ID, null: false
+    field :id, ID, null: true
     field :name, String, null: true
     field :email, String, null: true
   end

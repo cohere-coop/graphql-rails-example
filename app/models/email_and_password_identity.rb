@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+#  A particular user/password combination
 class EmailAndPasswordIdentity < Identity
   validates_length_of :password, maximum: ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED
   validates_confirmation_of :password, allow_blank: true
@@ -6,7 +9,7 @@ class EmailAndPasswordIdentity < Identity
   end
 
   def self.authenticate(identity)
-    record = find_by(identifier: identity.email_and_password.email)
-    record.authenticate(identity.email_and_password.password)
+    find_by(identifier: identity.email_and_password.email)
+      &.authenticate(identity.email_and_password.password)
   end
 end

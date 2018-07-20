@@ -13,6 +13,10 @@ Then('the response has {string} at {string}', function (data, loc) {
   return expect(this.lookup(loc)).to.equal(this.interpolate(data))
 })
 
+Then('the response is null at {string}', function (loc) {
+  return expect(this.lookup(loc)).to.be.null
+})
+
 Then('the response has no errors', function () {
   return expect(this.response.errors).to.be.undefined
 })

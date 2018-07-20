@@ -25,6 +25,8 @@ class Identity < ApplicationRecord
                                 AccessTokenIdentity
                               end
 
-    identification_strategy.authenticate(identity)
+    record = identification_strategy.authenticate(identity)
+    return record if record
+    GuestIdentity.new(identity: identity)
   end
 end
