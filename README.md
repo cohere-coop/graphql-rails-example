@@ -1,24 +1,20 @@
-# README
+# GraphQL Rails Example
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+GraphQL is a powerful tool for API design, acting essentially as database schema definition and transport layer.
 
-Things you may want to cover:
+This repository stands as a quasi-reference for the ruby-graphql gem in a working rails codebase, ideally in a way that covers as many of the features as possible; with some 'reasonably ok practices'.
 
-* Ruby version
+Currently, the example includes:
 
-* System dependencies
+* Writing feature tests in cucumber-js with apollo
+* Registration via email and password
+* Authentication via access tokens and email and passwords
 
-* Configuration
+## Running the example
 
-* Database creation
+This is written in ruby 2.5 and the feature tests are relying on node 9+. The database is sqlite for ease of installation purposes.
 
-* Database initialization
+I recommend running the app on port 5000, using `bin/rails s -p 5000`
 
-* How to run the test suite
+Tests are ran by executing `npx cucumber-js`
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
