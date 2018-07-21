@@ -10,6 +10,8 @@ Currently, the example includes:
 * Registration via email and password
 * Authentication via access tokens and email and passwords
 
+I would recommend reading through the feature tests that demonstrate the features you're interested in, and then diving into the code. Feel free to open issues with "wtf is going on here?" and I'll try to add comments and/or refactor into something more comprehensible as time permits.
+
 ## Running the example
 
 This is written in ruby 2.5 and the feature tests are relying on node 9+. The database is sqlite for ease of installation purposes.
