@@ -1,0 +1,43 @@
+{
+  "name": "rails-graphql-example",
+  "version": "0.1.0",
+  "description": "A quasi-reference the demonstrates apollojs working with a rails grapqhl-api",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "cucumber": "^4.2.1",
+    "cuid": "^2.1.1",
+    "dotenv": "^6.0.0",
+    "apollo-boost": "^0.1.10",
+    "graphql-tag": "^2.9.2",
+    "graphql": "^0.13.2",
+    "lodash": "^4.17.10",
+    "mustache": "^2.3.0",
+    "node-fetch": "^2.1.2",
+    "standard": "^11.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "cucumber-js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wecohere/graphql-rails-example.git"
+  },
+  "keywords": [
+    "graphql",
+    "ruby",
+    "rails",
+    "apollo"
+  ],
+  "author": "Zee@Cohere",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wecohere/graphql-rails-example/issues"
+  },
+  "homepage": "https://github.com/wecohere/graphql-rails-example#readme"
+}
