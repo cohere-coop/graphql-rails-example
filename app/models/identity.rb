@@ -20,7 +20,7 @@ class Identity < ApplicationRecord
 
   def self.identification_strategy_for(credentials:)
     if credentials.email_and_password
-      EmailAndPasswordIdentity
+      EmailIdentity
     elsif credentials.access_token
       AccessTokenIdentity
     end

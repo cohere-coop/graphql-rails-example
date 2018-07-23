@@ -4,13 +4,15 @@
 class User < ApplicationRecord
   has_many :identities
   has_many :access_token_identities, class_name: :AccessTokenIdentity
-  has_many :email_and_password_identities, class_name: :EmailAndPasswordIdentity
+  has_many :email_identities, class_name: :EmailIdentity
+
+  has_secure_password
 
   def access_token
     access_token_identities&.first&.identifier
   end
 
   def email
-    email_and_password_identities&.first&.identifier
+    email_identities&.first&.identifier
   end
 end
