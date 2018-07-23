@@ -6,13 +6,10 @@ module Types
     field :access_token, String, null: true
     field :user, Types::User, null: true
     field :identity, Types::Identity, null: true
+    delegate :access_token, to: :user, allow_nil: true
 
     def identity
       object
-    end
-
-    def access_token
-      user.access_token
     end
   end
 end

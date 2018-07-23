@@ -4,7 +4,6 @@ class GuestIdentity
   attr_accessor :identity
 
   def user
-    @user ||= Guest.new
   end
 
   def errors

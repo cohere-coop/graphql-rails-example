@@ -17,6 +17,10 @@ Then('the response is null at {string}', function (loc) {
   return expect(this.lookup(loc)).to.be.null
 })
 
+Then('the response is undefined at {string}', function (loc) {
+  return expect(this.lookup(loc)).to.be.undefined
+})
+
 Then('the response has no errors', function () {
   return expect(this.response.errors).to.be.undefined
 })

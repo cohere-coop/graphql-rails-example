@@ -54,8 +54,7 @@ Feature: User authenticates
     }
     """
     Then the response does not have a functioning access token at "authenticate.accessToken"
-    And the response is null at "authenticate.user.id"
-    And the response is null at "authenticate.user.id"
+    And the response is undefined at "authenticate.user.id"
     And the response has "401" at "authenticate.errors[0].status"
     And the response has "Invalid Credentials" at "authenticate.errors[0].title"
     And the response has "Invalid email or password" at "authenticate.errors[0].detail"
