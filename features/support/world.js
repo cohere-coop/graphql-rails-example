@@ -30,6 +30,7 @@ class World {
   lookup (loc) {
     return at(this.response.data, loc)[0]
   }
+
   get response () {
     return last(this.responses)
   }

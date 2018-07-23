@@ -12,6 +12,7 @@ chai.use(chaiAsPromised)
 Given('I have not yet registered', function () {
   this.data.me = { email: `user-${cuid()}@example.com`, password: 'password' }
 })
+
 Given('I have already registered', function () {
   this.data.me = { email: `user-${cuid()}@example.com`, password: 'password' }
   return this.client.register({ identity: { emailAndPassword: this.data.me } }).then(({ data }) => {
