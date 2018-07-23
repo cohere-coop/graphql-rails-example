@@ -29,5 +29,5 @@ Then('the response has a functioning access token at {string}', function (loc) {
 Then('the response does not have a functioning access token at {string}', function (loc) {
   const client = new AppClient({ token: this.lookup(loc) })
 
-  return expect(client.query({ query: gql`query Me { me { id } }` }).then(({ data }) => data.me.id)).to.eventually.be.null
+  return expect(client.query({ query: gql`query Me { me { id } }` }).then(({ data }) => data.me)).to.eventually.be.null
 })
