@@ -5,7 +5,7 @@ module Mutations
     payload_type Types::UserSession
 
     def resolve(identity:)
-      Identity.authenticate(identity: identity)
+      Identity.authenticate(credentials: identity)
     end
   end
 end

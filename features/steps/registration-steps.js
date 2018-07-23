@@ -31,3 +31,9 @@ Then('the response does not have a functioning access token at {string}', functi
 
   return expect(client.query({ query: gql`query Me { me { id } }` }).then(({ data }) => data.me)).to.eventually.be.null
 })
+
+Then('I can authenticate with my email and password via the authenticate mutation', function () {
+  const identity = { emailAndPassword: { email: this.data.me.email, password: this.data.me.password } }
+  return expect(this.client.authenticate({ identity }).then(({ data }) => data.authenticate.access_token))
+    .to.eventually.not.be.null
+})

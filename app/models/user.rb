@@ -7,10 +7,10 @@ class User < ApplicationRecord
   has_many :email_and_password_identities, class_name: :EmailAndPasswordIdentity
 
   def access_token
-    access_token_identities.first.identifier
+    access_token_identities&.first&.identifier
   end
 
   def email
-    email_and_password_identities.first.identifier
+    email_and_password_identities&.first&.identifier
   end
 end
