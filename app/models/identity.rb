@@ -3,30 +3,26 @@
 # Identifies a particular authentication method in the system, such as email and password, oauth, access token
 # etc.
 class Identity < ApplicationRecord
-  validates :identifier, uniqueness: true
+  validates :identifier, uniqueness: { scope: :type }
   has_secure_password validations: false
   belongs_to :user
 
-  def self.register(identity:)
-    return unless identity.email_and_password
-    identity = EmailAndPasswordIdentity.new(identifier: identity.email_and_password.email,
-                                            password: identity.email_and_password.password)
+  def self.register(credentials:)
 
-    identity.user = User.create
-    identity.save
-    AccessTokenIdentity.create(user: identity.user)
+    identity = identification_strategy_for(credentials: credentials).register(credentials)
+    AccessTokenIdentity.create(user: identity.user) if identity.persisted?
     identity
   end
 
-  def self.authenticate(identity:)
-    identification_strategy = if identity.email_and_password
-                                 EmailAndPasswordIdentity
-                              elsif identity.access_token
-                                AccessTokenIdentity
-                              end
+  def self.authenticate(credentials:)
+    identification_strategy_for(credentials: credentials).authenticate(credentials)
+  end
 
-    record = identification_strategy.authenticate(identity)
-    return record if record
-    GuestIdentity.new(identity: identity)
+  def self.identification_strategy_for(credentials:)
+    if credentials.email_and_password
+      EmailAndPasswordIdentity
+    elsif credentials.access_token
+      AccessTokenIdentity
+    end
   end
 end

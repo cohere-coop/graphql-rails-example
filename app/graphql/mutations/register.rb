@@ -7,7 +7,7 @@ module Mutations
     payload_type Types::UserSession
 
     def resolve(identity:)
-      Identity.register(identity: identity)
+      Identity.register(credentials: identity)
     end
   end
 end

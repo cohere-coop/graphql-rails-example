@@ -21,10 +21,14 @@ Then('the response is undefined at {string}', function (loc) {
   return expect(this.lookup(loc)).to.be.undefined
 })
 
-Then('the response has no errors', function () {
+Then('the response has no system level errors', function () {
   return expect(this.response.errors).to.be.undefined
 })
 
 Then('the response has an ID at {string}', function (loc) {
   return expect(this.lookup(loc)).not.to.be.empty
+})
+
+Then('the response is empty at {string}', function (loc) {
+  return expect(this.lookup(loc)).to.be.empty
 })

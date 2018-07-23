@@ -27,6 +27,12 @@ exports.AppClient = class AppClient {
     this.query = this.client.query.bind(this.client)
   }
 
+  authenticate ({ identity }) {
+    return this.mutate({ variables: { identity },
+      mutation: gql`mutation Authenticate($identity: IdentityInput!) {
+      authenticate(identity: $identity) { accessToken user { id, name } } }` })
+  }
+
   register ({ identity }) {
     return this.mutate({ variables: { identity }, mutation: gql`mutation Register($identity: IdentityInput!) {
       register(identity: $identity) {
