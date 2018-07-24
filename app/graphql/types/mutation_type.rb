@@ -8,8 +8,9 @@ module Types
     field :authenticate, mutation: Mutations::Authenticate
 
     # Task List Operations
-    field :createTaskList , mutation: Mutations::TaskLists::Create
+    field :createTaskList, mutation: Mutations::TaskLists::Create
     field :taskListCreate, mutation: Mutations::TaskLists::Create
+    field :taskListsAddUsers, mutation: Mutations::TaskLists::AddUsers
 
     field :tasksCreate, mutation: Mutations::Tasks::Create
   end
