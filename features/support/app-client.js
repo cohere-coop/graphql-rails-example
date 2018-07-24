@@ -42,4 +42,11 @@ exports.AppClient = class AppClient {
     }
     ` })
   }
+
+  createTaskList (taskList) {
+    return this.mutate({ variables: { taskList },
+      mutation: gql`mutation TaskListCreate($taskList: TaskListInput!) {
+        taskListCreate(taskList: $taskList) { taskList { id, name } }
+      }` })
+  }
 }
