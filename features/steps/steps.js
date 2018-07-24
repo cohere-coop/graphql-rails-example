@@ -5,6 +5,7 @@ const chai = require('chai')
 const chaiAsPromised = require('chai-as-promised')
 
 const { expect } = chai
+const { last, times } = require('lodash')
 
 chai.use(chaiAsPromised)
 
@@ -19,6 +20,16 @@ Given('I have already registered', function () {
 Given('I have a task list', function () {
   return this.client.createTaskList({ name: 'groceries' })
     .then(({ data }) => this.data.me.taskLists.push(data.taskListCreate.taskList))
+})
+
+Given('I have {int} tasks assigned to that task list', function (count) {
+  return Promise.all(times(count, (n) => {
+    const task = { title: `task ${n}` }
+    const taskLists = [last(this.data.me.taskLists).id]
+    return this.client.createTask({ task, taskLists }).then(({ data }) => {
+      return this.data.me.tasks.push(data.tasksCreate.task)
+    })
+  }))
 })
 
 Given('I am making requests as an authenticated member', function () {
