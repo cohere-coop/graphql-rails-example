@@ -20,6 +20,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Provides tooling to define graphql resolvers, subscriptions, queries, and mutations
 gem "graphql"
+gem "graphql-errors"
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

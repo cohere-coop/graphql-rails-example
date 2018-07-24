@@ -1,16 +1,29 @@
 require('dotenv').config()
-const { AppClient } = require('./app-client')
 
 const { setWorldConstructor } = require('cucumber')
+const cuid = require('cuid')
 const Mustache = require('mustache')
 const { at, last } = require('lodash')
-
 const gql = require('graphql-tag')
+
+const { AppClient } = require('./app-client')
 
 class World {
   constructor () {
     this.data = {}
     this.client = new AppClient({})
+  }
+
+  randomPerson () {
+    return { email: `user-${cuid()}@example.com`, password: 'password' }
+  }
+
+  registerMe () {
+    this.data.me = this.randomPerson()
+    return this.client.register({ identity: { emailAndPassword: this.data.me } }).then(({ data }) => {
+      this.data.me.id = data.register.user.id
+      return { data }
+    })
   }
 
   mutate (mutation) {

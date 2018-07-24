@@ -1,0 +1,1 @@
+class AuthenticatedUserRequiredError < StandardError; end

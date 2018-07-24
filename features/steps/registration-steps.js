@@ -1,5 +1,4 @@
 const { Given, Then } = require('cucumber')
-const cuid = require('cuid')
 const { AppClient } = require('../support/app-client')
 const gql = require('graphql-tag')
 const chai = require('chai')
@@ -10,13 +9,16 @@ const { expect } = chai
 chai.use(chaiAsPromised)
 
 Given('I have not yet registered', function () {
-  this.data.me = { email: `user-${cuid()}@example.com`, password: 'password' }
+  this.data.me = this.randomPerson()
 })
 
 Given('I have already registered', function () {
-  this.data.me = { email: `user-${cuid()}@example.com`, password: 'password' }
-  return this.client.register({ identity: { emailAndPassword: this.data.me } }).then(({ data }) => {
-    this.data.me.id = data.register.user.id
+  return this.registerMe()
+})
+
+Given('I am making requests as an authenticated member', function () {
+  return this.registerMe().then(({ data }) => {
+    this.client = new AppClient({ token: data.register.accessToken })
   })
 })
 
