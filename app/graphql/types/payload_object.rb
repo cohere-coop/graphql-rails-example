@@ -3,6 +3,7 @@ module Types
     field :errors, [Error], null: true
 
     def errors
+      return object[:errors] if object.respond_to?(:key?) && object[:errors]
       return nil unless object.respond_to?(:errors)
       object.errors.map do |field, message|
         if field == :credentials

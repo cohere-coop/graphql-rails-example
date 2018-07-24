@@ -16,12 +16,14 @@ module Mutations
             if membership.persisted?
               membership
             else
-              errors.push(status: 422, title: "Unable to Add User",
-                          detail: membership.errors.full_messages.join("."))
+              errors.push(status: 422, title: "Unable to Add User to Task List",
+                          detail: "#{membership.user.email} could not be added to " \
+                                  "#{membership.task_list.name}. " \
+                                  "#{membership.errors.full_messages.join('.')}")
               next
             end
           end
-        end.flatten
+        end.flatten.compact
         { errors: errors, memberships: new_memberships }
       end
     end
