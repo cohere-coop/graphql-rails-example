@@ -23,6 +23,7 @@ class World {
     const { email, password } = this.data.me
     return this.client.register({ identity: { emailAndPassword: { email, password } } }).then(({ data }) => {
       this.data.me.id = data.register.user.id
+      this.users.push(this.data.me)
       return { data }
     })
   }
@@ -51,17 +52,22 @@ class World {
     return last(this.responses)
   }
 
+  get users () {
+    this.data.users = this.data.users || []
+    return this.data.users
+  }
+
   get responses () {
     this._responses = this._responses || []
     return this._responses
   }
 
   set variables (variables) {
-    this._variables = variables
+    this._variables = JSON.parse(this.interpolate(variables))
   }
 
   get variables () {
-    return JSON.parse(this.interpolate(this._variables))
+    return this._variables
   }
 }
 

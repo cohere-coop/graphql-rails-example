@@ -5,7 +5,7 @@ const chai = require('chai')
 const chaiAsPromised = require('chai-as-promised')
 
 const { expect } = chai
-const { last, times } = require('lodash')
+const { merge, last, times } = require('lodash')
 
 chai.use(chaiAsPromised)
 
@@ -17,6 +17,14 @@ Given('I have already registered', function () {
   return this.registerMe()
 })
 
+Given('another user exists', function () {
+  const other = this.randomPerson()
+  this.users.push(other)
+  const { email, password } = other
+  return this.client.register({ identity: { emailAndPassword: { email, password } } }).then(({ data }) => {
+    merge(other, data.register.user)
+  })
+})
 Given('I have a task list', function () {
   return this.client.createTaskList({ name: 'groceries' })
     .then(({ data }) => this.data.me.taskLists.push(data.taskListCreate.taskList))
