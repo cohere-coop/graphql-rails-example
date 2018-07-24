@@ -16,6 +16,11 @@ Given('I have already registered', function () {
   return this.registerMe()
 })
 
+Given('I have a task list', function () {
+  return this.client.createTaskList({ name: 'groceries' })
+    .then(({ data }) => this.data.me.taskLists.push(data.taskListCreate.taskList))
+})
+
 Given('I am making requests as an authenticated member', function () {
   return this.registerMe().then(({ data }) => {
     this.client = new AppClient({ token: data.register.accessToken })

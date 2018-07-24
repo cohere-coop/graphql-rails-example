@@ -15,12 +15,13 @@ class World {
   }
 
   randomPerson () {
-    return { email: `user-${cuid()}@example.com`, password: 'password' }
+    return { email: `user-${cuid()}@example.com`, password: 'password', taskLists: [] }
   }
 
   registerMe () {
     this.data.me = this.randomPerson()
-    return this.client.register({ identity: { emailAndPassword: this.data.me } }).then(({ data }) => {
+    const { email, password } = this.data.me
+    return this.client.register({ identity: { emailAndPassword: { email, password } } }).then(({ data }) => {
       this.data.me.id = data.register.user.id
       return { data }
     })

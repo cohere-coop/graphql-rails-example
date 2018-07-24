@@ -4,7 +4,6 @@ class TaskList < ApplicationRecord
   has_many :owner_memberships, -> { owners }, class_name: :TaskListMembership
   has_many :owners, through: :owner_memberships, source: :user
 
-  def tasks
-    []
-  end
+  has_many :tasks_task_lists
+  has_many :tasks, through: :tasks_task_lists
 end

@@ -9,5 +9,8 @@ module Types
 
     # Task List Operations
     field :createTaskList , mutation: Mutations::TaskLists::Create
+    field :taskListCreate, mutation: Mutations::TaskLists::Create
+
+    field :tasksCreate, mutation: Mutations::Tasks::Create
   end
 end
