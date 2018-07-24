@@ -9,8 +9,20 @@ When('I run the following mutation', function (graphql) {
   return this.mutate(graphql)
 })
 
+When('I run the following query', function (graphql) {
+  return this.query(graphql)
+})
+
 Then('the response has {string} at {string}', function (data, loc) {
   return expect(this.lookup(loc)).to.equal(this.interpolate(data))
+})
+
+Then('the response has {int} items at {string}', function (count, loc) {
+  return expect(this.lookup(loc).length).to.equal(count)
+})
+
+Then('the response is true at {string}', function (loc) {
+  return expect(this.lookup(loc)).to.be.true
 })
 
 Then('the response is null at {string}', function (loc) {

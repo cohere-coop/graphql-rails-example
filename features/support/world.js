@@ -15,7 +15,7 @@ class World {
   }
 
   randomPerson () {
-    return { email: `user-${cuid()}@example.com`, password: 'password', taskLists: [] }
+    return { email: `user-${cuid()}@example.com`, password: 'password', taskLists: [], tasks: [] }
   }
 
   registerMe () {
@@ -38,7 +38,9 @@ class World {
   }
 
   query (query) {
-    return this.client.query({ query: gql(query), variables: this.variables })
+    return this.client.query({ query: gql(query), variables: this.variables }).then((result) => {
+      this.responses.push(result)
+    })
   }
 
   lookup (loc) {

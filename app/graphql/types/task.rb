@@ -6,6 +6,6 @@ module Types
     field :title, String, null: true
     field :description, String, null: true
 
-    field :task_lists, [TaskList], null: true
+    field :task_lists, TaskList.connection_type, null: true
   end
 end

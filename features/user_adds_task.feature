@@ -25,7 +25,7 @@ Feature: User adds task
           id
           title
           description
-          taskLists { id }
+          taskLists { edges { cursor, node { id } } }
         }
         errors { status, title, detail }
       }
@@ -33,6 +33,6 @@ Feature: User adds task
     """
     Then the response has no system level errors
     And the response is undefined at "taskCreate.errors"
-    And the response has "{{ me.taskLists.0.id }}" at "tasksCreate.task.taskLists[0].id"
+    And the response has "{{ me.taskLists.0.id }}" at "tasksCreate.task.taskLists.edges[0].node.id"
     And the response has "Do a thing!" at "tasksCreate.task.title"
     And the response has "You got to do this! It's so great!" at "tasksCreate.task.description"

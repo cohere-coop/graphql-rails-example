@@ -14,7 +14,7 @@ I would recommend reading through the feature tests that demonstrate the feature
 
 ## Running the example
 
-This is written in ruby 2.5 and the feature tests are relying on node 9+. The database is sqlite for ease of installation purposes.
+This is written in ruby 2.5 and the feature tests are relying on node 9+. The database is postresql.
 
 I recommend running the app on port 5000, using `bin/rails s -p 5000`
 
