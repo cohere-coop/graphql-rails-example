@@ -26,5 +26,5 @@ Feature: User receives live updates to task list
     }
     """
     When a task is added to the task list
-    Then the subscription response has "{{ tasks[0].title }}" at "taskAdded.task.title"
+    Then the subscription response has "{{ me.tasks.0.title }}" at "taskAdded.task.title"
     And the subscription response has an ID at "taskAdded.task.id"

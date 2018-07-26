@@ -36,11 +36,10 @@ class World {
 
   subscribe (query) {
     const subscription = new Promise((resolve, reject) => {
-      console.log('defining a subscription')
       this.client.subscribe({ query: gql(query), variables: this.variables }).subscribe({
-        next (x) { console.log('got a thing', x); resolve(x) },
-        error (err) { console.log('error', err); reject(err) },
-        complete () { console.log('complete'); resolve() }
+        next (x) { resolve(x) },
+        error (err) { reject(err) },
+        complete () { resolve() }
       })
     })
     this.subscriptions.push(subscription)

@@ -50,9 +50,9 @@ Then('the response is empty at {string}', function (loc) {
 })
 
 Then('the subscription response has an ID at {string}', function (loc) {
-  return expect(this.subscriptions[0].then((data) => this.lookup(loc, data))).to.eventually.not.be.empty
+  return expect(this.subscriptions[0].then(({ data }) => this.lookup(loc, data))).to.eventually.not.be.empty
 })
 
 Then('the subscription response has {string} at {string}', function (value, loc) {
-  return expect(this.subscriptions[0].then((data) => this.lookup(loc, data))).to.eventually.equal(this.interpolate(value))
+  return expect(this.subscriptions[0].then(({ data }) => this.lookup(loc, data))).to.eventually.equal(this.interpolate(value))
 })

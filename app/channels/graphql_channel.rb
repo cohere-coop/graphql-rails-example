@@ -19,7 +19,7 @@ class GraphqlChannel < ApplicationCable::Channel
       operation_name: operation_name
     )
 
-    puts result
+    puts "RESULT": result.to_h
     payload = {
       result: result.subscription? ? {data: nil} : result.to_h,
       more: result.subscription?,
@@ -36,7 +36,7 @@ class GraphqlChannel < ApplicationCable::Channel
 
   def unsubscribed
     @subscription_ids.each { |sid|
-      CardsSchema.subscriptions.delete_subscription(sid)
+      AppSchema.subscriptions.delete_subscription(sid)
     }
   end
 
