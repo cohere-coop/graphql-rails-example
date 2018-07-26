@@ -1,8 +1,9 @@
-const { Given, Then } = require('cucumber')
+const { Given, When, Then } = require('cucumber')
 const { AppClient } = require('../support/app-client')
 const gql = require('graphql-tag')
 const chai = require('chai')
 const chaiAsPromised = require('chai-as-promised')
+const cuid = require('cuid')
 
 const { expect } = chai
 const { merge, last, times } = require('lodash')
@@ -43,6 +44,14 @@ Given('I have {int} tasks assigned to that task list', function (count) {
 Given('I am making requests as an authenticated member', function () {
   return this.registerMe().then(({ data }) => {
     this.client = new AppClient({ token: data.register.accessToken })
+  })
+})
+
+When('a task is added to the task list', function () {
+  const task = { title: `task ${cuid()}` }
+  const taskLists = [last(this.data.me.taskLists).id]
+  return this.client.createTask({ task, taskLists }).then(({ data }) => {
+    return this.data.me.tasks.push(data.tasksCreate.task)
   })
 })
 

@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-const { setWorldConstructor } = require('cucumber')
+const { After, setWorldConstructor } = require('cucumber')
 const cuid = require('cuid')
 const Mustache = require('mustache')
 const { at, last } = require('lodash')
@@ -34,6 +34,18 @@ class World {
     })
   }
 
+  subscribe (query) {
+    const subscription = new Promise((resolve, reject) => {
+      console.log('defining a subscription')
+      this.client.subscribe({ query: gql(query), variables: this.variables }).subscribe({
+        next (x) { console.log('got a thing', x); resolve(x) },
+        error (err) { console.log('error', err); reject(err) },
+        complete () { console.log('complete'); resolve() }
+      })
+    })
+    this.subscriptions.push(subscription)
+  }
+
   interpolate (string) {
     return Mustache.render(string, this.data)
   }
@@ -44,8 +56,9 @@ class World {
     })
   }
 
-  lookup (loc) {
-    return at(this.response.data, loc)[0]
+  lookup (loc, data) {
+    data = data || this.response.data
+    return at(data, loc)[0]
   }
 
   get response () {
@@ -62,6 +75,11 @@ class World {
     return this._responses
   }
 
+  get subscriptions () {
+    this._subscriptions = this._subscriptions || []
+    return this._subscriptions
+  }
+
   set variables (variables) {
     this._variables = JSON.parse(this.interpolate(variables))
   }
@@ -72,3 +90,7 @@ class World {
 }
 
 setWorldConstructor(World)
+
+After(function () {
+  this.client.cable.disconnect()
+})

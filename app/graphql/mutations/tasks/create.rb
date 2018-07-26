@@ -13,6 +13,7 @@ module Mutations
 
         current_user.task_lists.where(id: task_lists).each do |task_list|
           task_list.tasks << result
+          AppSchema.subscriptions.trigger('taskAdded', { task_list: task_list.id }, result)
         end
 
         result
