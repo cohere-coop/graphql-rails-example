@@ -30,8 +30,8 @@ Feature: User adds other user to task list
     Then the response has no system level errors
     And the response has "{{ users.1.id }}" at "taskListsAddUsers.memberships.0.user.id"
     And the response has "{{ me.taskLists.0.id }}" at "taskListsAddUsers.memberships.0.taskList.id"
-    And the response has "{{ me.id }}" at "taskListsAddUsers.memberships.0.taskList.owners.edges.0.node.id"
-    And the response has "{{ users.1.id }}" at "taskListsAddUsers.memberships.0.taskList.owners.edges.1.node.id"
+    And the response includes "{{ me.id }}" at "taskListsAddUsers.memberships.0.taskList.owners.edges[].node.id"
+    And the response includes "{{ users.1.id }}" at "taskListsAddUsers.memberships.0.taskList.owners.edges[].node.id"
 
 
   Scenario: User adds existing list member to list

@@ -6,25 +6,28 @@
   "directories": {
     "lib": "lib"
   },
-  "dependencies": {},
+  "dependencies": {
+    "npm": "^6.3.0"
+  },
   "devDependencies": {
+    "actioncable": "^5.2.0",
     "apollo-boost": "^0.1.10",
+    "browser-env": "^3.2.5",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "cucumber": "^4.2.1",
     "cuid": "^2.1.1",
     "dotenv": "^6.0.0",
     "graphql": "^0.13.2",
+    "graphql-ruby-client": "^1.4.0",
     "graphql-tag": "^2.9.2",
+    "isomorphic-ws": "^4.0.1",
     "lodash": "^4.17.10",
+    "lodash-getpath": "^0.2.4",
     "mustache": "^2.3.0",
     "node-fetch": "^2.1.2",
     "standard": "^11.0.1",
-    "ws": "^6.0.0",
-    "actioncable": "^5.2.0",
-    "browser-env": "^3.2.5",
-    "graphql-ruby-client": "^1.4.0",
-    "isomorphic-ws": "^4.0.1"
+    "ws": "^6.0.0"
   },
   "scripts": {
     "test": "cucumber-js"

@@ -3,13 +3,14 @@ require('dotenv').config()
 const { After, setWorldConstructor } = require('cucumber')
 const cuid = require('cuid')
 const Mustache = require('mustache')
-const { at, last } = require('lodash')
+const { getPath, at, last } = require('lodash-getpath')
 const gql = require('graphql-tag')
 
 const { AppClient } = require('./app-client')
 
 class World {
   constructor () {
+    console.error("INITIALIZING WORLD")
     this.data = {}
     this.client = new AppClient({})
   }
@@ -37,9 +38,9 @@ class World {
   subscribe (query) {
     const subscription = new Promise((resolve, reject) => {
       this.client.subscribe({ query: gql(query), variables: this.variables }).subscribe({
-        next (x) { resolve(x) },
-        error (err) { reject(err) },
-        complete () { resolve() }
+        next (x) {  resolve(x) },
+        error (err) {  reject(err) },
+        complete () {  resolve() }
       })
     })
     this.subscriptions.push(subscription)
@@ -58,6 +59,10 @@ class World {
   lookup (loc, data) {
     data = data || this.response.data
     return at(data, loc)[0]
+  }
+  lookup_all (loc, data) {
+    data = data || this.response.data
+    return getPath(data, loc)
   }
 
   get response () {

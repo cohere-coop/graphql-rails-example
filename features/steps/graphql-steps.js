@@ -21,6 +21,10 @@ Then('the response has {string} at {string}', function (data, loc) {
   return expect(this.lookup(loc)).to.equal(this.interpolate(data))
 })
 
+Then('the response includes {string} at {string}', function (data, loc) {
+  return expect(this.lookup_all(loc)).to.include(this.interpolate(data))
+})
+
 Then('the response has {int} items at {string}', function (count, loc) {
   return expect(this.lookup(loc).length).to.equal(count)
 })
